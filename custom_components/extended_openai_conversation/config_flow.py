@@ -29,6 +29,7 @@ from .const import (
     CONF_API_VERSION,
     CONF_ATTACH_USERNAME,
     CONF_BASE_URL,
+    CONF_ATTACH_USERNAME_TO_PROMPT,
     CONF_CHAT_MODEL,
     CONF_CONTEXT_THRESHOLD,
     CONF_CONTEXT_TRUNCATE_STRATEGY,
@@ -43,6 +44,7 @@ from .const import (
     CONF_USE_TOOLS,
     CONTEXT_TRUNCATE_STRATEGIES,
     DEFAULT_ATTACH_USERNAME,
+    DEFAULT_ATTACH_USERNAME_TO_PROMPT,
     DEFAULT_CHAT_MODEL,
     DEFAULT_CONF_BASE_URL,
     DEFAULT_CONF_FUNCTIONS,
@@ -90,6 +92,7 @@ DEFAULT_OPTIONS = types.MappingProxyType(
         CONF_USE_TOOLS: DEFAULT_USE_TOOLS,
         CONF_CONTEXT_THRESHOLD: DEFAULT_CONTEXT_THRESHOLD,
         CONF_CONTEXT_TRUNCATE_STRATEGY: DEFAULT_CONTEXT_TRUNCATE_STRATEGY,
+        CONF_ATTACH_USERNAME_TO_PROMPT: DEFAULT_ATTACH_USERNAME_TO_PROMPT,
     }
 )
 
@@ -259,4 +262,9 @@ class OptionsFlow(config_entries.OptionsFlow):
                     mode=SelectSelectorMode.DROPDOWN,
                 )
             ),
+            vol.Optional(
+                CONF_ATTACH_USERNAME_TO_PROMPT,
+                description={"suggested_value": options.get(CONF_ATTACH_USERNAME_TO_PROMPT)},
+                default=DEFAULT_ATTACH_USERNAME_TO_PROMPT,
+            ): BooleanSelector(),
         }
