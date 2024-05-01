@@ -229,7 +229,7 @@ class OpenAIAgent(conversation.AbstractConversationAgent):
         self.history[conversation_id] = messages
         
         if len(services_called) > 0:
-            response.content = response.content + ' \n\nService executed successfully.'
+            query_response.message.content = query_response.message.content + ' \n\nService executed successfully.'
             _LOGGER.info(yaml.dump(services_called))
 
         self.hass.bus.async_fire(
